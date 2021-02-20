@@ -1,0 +1,167 @@
+{
+  "logfile": "cdashboard.json",
+  "cryptodashboard_file_version": 0.98,
+  "crunch_history": true,
+  "telegram_settings": {
+    "use_telegram": true,
+    "bot_key": "your-bot_key",
+    "chat_id": "12345678"
+  },
+  "coins": {
+    "Adamant": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Ark": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "DArk": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Bind main": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Bind dev": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Blockpool": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "GNY test": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "GNY main": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Hydra": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "LeaseHold": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Qredit": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "QreditV2": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Lisk main": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Lisk test": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Rise": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Shift main": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ],
+    "Shift test": [
+        {
+          "id": "",
+          "pubaddress": "",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": "template"
+        }
+    ]
+  }
+}
+
+
