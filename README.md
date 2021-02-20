@@ -1,18 +1,15 @@
-# DPoS-Crypto-Dashboard
+# DPoS Node Dashboard
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dutchpool/cdashboard/blob/master/LICENSE)
 [![docs](https://img.shields.io/badge/doc-online-blue.svg)](https://github.com/dutchpool/cdashboard/wiki)
 
 
-Dashboard for DPoS delegate information, DPoS private addresses, Masternodes status, staking info and crypto Wallets.
+Dashboard for DPoS Node information.
 
-An overview of all your important DPoS delegate information e.g. Rank, Amount of coins, Approval, Number of Votes and the difference of the last 24h. 
-Also Masternode information, like when you receive the last amount of coins in your MN wallet. The same for Staking coins, last but not least, just crypto Wallets, like Bitcoin and Ethereum!
-Crypto Dashboard is made to sort those things out and present you all your important information in one handy overview.
+An overview of all your important DPoS Node and delegate/validator information in one place! 
 
 
-DPoS Dashboard Features, for active delegates but also for private wallets:
-
-- Monitor your delegate(s) Balance, Rank, Votes received, Weight, Forged status, Productivity, Blocks forged in 24h and Missed blocks
+DPoS Node Dashboard features:
+- Monitor your delegate(s) balance, rank, votes received, weight, forged status, blocks forged in 24h and Missed blocks
 - Monitor your delegate(s) performance and status over the last 24 hours, balance change, rank change, votes change, weight change
 - See quickly if your node is currently missing blocks or is already recovered 
 - When blocks are now and then missing, this is an indicator that something could be wrong with the server 
@@ -59,6 +56,10 @@ The parameters in the config.json:
 - logfile: the file where all gathered node info is stored; default "cdashboard.json"; you can change the logfile name the way you like (handy for setting up multiple config files with multiple log files, using one python script)
 - cryptodashboard_file_version: internal check if version is correct for updates
 - crunch_history: true or false; this will crunch the log file after 48 hours to only one sample a day; if false, you keep every sample, which is not advisable (and not tested).
+-  telegram_settings:
+  - use_telegram: true or false
+  - bot_key: "your-bot_key" (looks like: 340346133:AAGADFd4334YASONIC8yX4yiC0fM345kkrjweVE)
+  - chat_id: "12345678"  
 - coins: section where the node info is represented for each DPoS environment
   - id: unique internal identifier, can be any random name, can hold white spaces 
   - pubaddress: the public address of the delegate wallet (no need / never add your private address/seeds!!!)
