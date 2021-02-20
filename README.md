@@ -20,7 +20,7 @@ DPoS Node Dashboard features:
 - Keep track of a history of several months by showing daily samples of the statistics.
 
 
-If you want to see a working demo of the Dpos-crypto-dashboard, please visit: http://cdashboarddemo.thamar.net/
+If you want to see a working demo of the Dpos-node-dashboard, please visit: http://dposdashboarddemo.thamar.net/
 If you like this dashboard created by delegate Thamar, please consider to vote for all the Dutch Pool delegates: "dutch_pool", "st3v3n", "kippers", "fnoufnou" and off course "thamar"! A small donation is also appreciated (see for more donation info below)
 
 _More info about Dutch Pool, our mission, our other tools and contributions to the DPoS ecosystem, please visit http://dutchpool.io_
@@ -30,9 +30,9 @@ _More info about Dutch Pool, our mission, our other tools and contributions to t
 
 First clone the crypto dashboard repository, install python and requests:
 
-```git clone https://github.com/dutchpool/cdashboard```
+```git clone https://github.com/ThamarD/dpos-dashboard```
 
-```cd cdashboard```
+```cd dpos-dashboard```
 
 ```apt-get install python3-pip```
 
@@ -43,9 +43,10 @@ First clone the crypto dashboard repository, install python and requests:
 
 To configure the Dashboard we need to fill in the configuration file. With this install 
 you get an template json config_template.json with all the supported DPoS nodes, which you can copy and fill in. 
-Here ar the steps (in the cdashboard directory: 
+Here are the steps (all in the DPoS-Dashboard directory): 
 
 ```
+cd ~/dpos-dashboard
 cp config_template.json config.json
 nano config.json
 ```
@@ -114,7 +115,7 @@ Above is an example of how the config.json must looks like (removed other templa
   - we have included a bash script, ```start.sh```, which does the steps to run and copy the necessary items each time. 
   - To configure this in the crontab, crontab runs every 10 minutes 
     - ```crontab -e```
-    -  ```*/10 * * * * cd ~/cdashboard && bash start.sh > /dev/null 2>&1```
+    -  ```*/10 * * * * cd ~/dpos-dashboard && bash start.sh > /dev/null 2>&1```
 
 
 ### Start it:
