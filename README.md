@@ -20,7 +20,7 @@ DPoS Node Dashboard features:
 - Keep track of a history of several months by showing daily samples of the statistics.
 
 
-If you want to see a working demo of the Dpos-node-dashboard, please visit: http://dposdashboarddemo.thamar.net/
+If you want to see a working demo of the Dpos-node-dashboard, please visit: http://dpos-dashboard.thamar.net/
 If you like this dashboard created by delegate Thamar, please consider to vote for all the Dutch Pool delegates: "dutch_pool", "st3v3n", "kippers", "fnoufnou" and off course "thamar"! A small donation is also appreciated (see for more donation info below)
 
 _More info about Dutch Pool, our mission, our other tools and contributions to the DPoS ecosystem, please visit http://dutchpool.io_
@@ -115,11 +115,13 @@ Above is an example of how the config.json must looks like (removed other templa
     -  ```*/10 * * * * cd ~/dpos-dashboard && bash start.sh > /dev/null 2>&1```
 
 
-### Start it:
+### Start the software:
+To start the software, use the start bash file. It wil run the python script and when the python code is ready, 
+it wil copy the output file to the right directory.  
+ ```bash start.sh``` 
 
-```python3 cryptodashboard.py``` or use ```bash start.sh```
-
-or if you want to use another config file:
+or if you want to use another config file, edit the start.sh 
+file and change the python line into something like this:
 
 ```python3 cryptodashboard.py -c config2.json```
 

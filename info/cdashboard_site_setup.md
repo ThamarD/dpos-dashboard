@@ -23,18 +23,23 @@ sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/YOURDOMAIN
 sudo nano /etc/nginx/sites-available/YOURDOMAIN.com
 ```
 
-Change ```root /var/www/html``` to ```root /home/USERNAME/cdashboard/docs```
- 
-Add your domain to the line server_name as follows: 
-
-```server_name YOURDOMAIN.COM;```
-
 You could add the cdashboard.html to the line with index index.html etc. like this
 
 ```
 #Add index.php to the list if you are using PHP
 index index.html index.htm index.nginx-debian.html cdashboard.html;
 ```
+
+
+Change ```root /var/www/html``` to ```root /home/USERNAME/cdashboard/docs```
+
+_Note: USERNAME, is your user on the system. Please don't use root but create a new user!_
+ 
+
+Add your domain to the line server_name as follows: 
+
+```server_name YOURDOMAIN.COM;```
+
 
 Ctrl + x, Y + enter.
 
@@ -44,10 +49,19 @@ Create a symbolic link of your YOURDOMAIN.com to the sites-enabled dir (don't ta
 sudo ln -s /etc/nginx/sites-available/YOURDOMAIN.COM /etc/nginx/sites-enabled/YOURDOMAIN.COM
 ```
 Note: if it is a fresh install of Nginx, in the directory /etc/nginx/sites-enabled/ there could be a "default" file.
-Remove this file with ```sudo rm default```.
+Remove this file with 
+```
+cd /etc/nginx/sites-enabled/
+ls -l
+```
+If YOURDOMAIN.com has the same color as default, you are good! Now remove default
+```sudo rm default```
 
 Reload nginx to make sure all changes are reloaded
-```sudo systemctl reload nginx```
+```
+sudo systemctl reload nginx
+sudo systemctl status nginx
+```
 
 You can logout if you want.
 
@@ -63,4 +77,5 @@ _Note: from experience, the description above is one way to do this, I know ther
 (and probably better) way's. Also a lot can go wrong with this, hope you can figure it out when things will not work 
 the first time!_
 
-Regards, Dutch Pool
+Best Regards, 
+Thamar from Dutch Pool
