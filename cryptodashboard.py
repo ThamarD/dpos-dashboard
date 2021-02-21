@@ -67,8 +67,10 @@ def loadLog():
         data = json.load(open(LOGFILE, 'r'))
     except:
         data = {
-            "cryptodashboard_file_version": 0.95,
+            "cryptodashboard_file_version": 0.98,
             "fastsampletime": 0,
+            "hourlysampletime": 0,
+            "sampleduration": 0,
             "coins": {}
         }
     return data

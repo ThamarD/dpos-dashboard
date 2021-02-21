@@ -27,20 +27,17 @@ _More info about Dutch Pool, our mission, our other tools and contributions to t
 
 
 ## Installing the software
-
 First clone the crypto dashboard repository, install python and requests:
 
-```git clone https://github.com/ThamarD/dpos-dashboard```
-
-```cd dpos-dashboard```
-
-```apt-get install python3-pip```
-
-```pip3 install requests```
-
+```
+git clone https://github.com/ThamarD/dpos-dashboard
+cd dpos-dashboard
+sudo apt-get install python3-pip
+sudo pip3 install requests
+```
+Note: _python3-pip_ and _request_ could already be installed  on the newer ubuntu images
 
 ## Configure the software
-
 To configure the Dashboard we need to fill in the configuration file. With this install 
 you get an template json config_template.json with all the supported DPoS nodes, which you can copy and fill in. 
 Here are the steps (all in the DPoS-Dashboard directory): 
@@ -110,7 +107,7 @@ Example config.json:
 Above is an example of how the config.json must looks like (removed other template DPoS entry's).
 
 ### Frontend setup:
-- install and setup a webserver (apache/nginx) to serve folder web, see file ```cdashboard_site_setup.md``` 
+- install and setup a webserver (apache/nginx) to serve folder web, see file ```info/cdashboard_site_setup.md``` 
 - We advise to run the Dashboard software (python script) every 10 minutes to collect it's data and monitor.
   - we have included a bash script, ```start.sh```, which does the steps to run and copy the necessary items each time. 
   - To configure this in the crontab, crontab runs every 10 minutes 
