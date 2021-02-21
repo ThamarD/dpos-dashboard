@@ -30,7 +30,7 @@ networksettings = {
     'Ark': [51,          8, 'https://explorer.ark.io',           '/address/',    'http://5.196.105.32:4003/api'],
     'DArk': [51,         8, 'https://dexplorer.ark.io',          '/wallets/',    'http://52.191.185.7:4003/api'],       # thamar's node - please use your own relay node
     'Bind main': [47,    6, 'https://bindscan.io',               '/address/',    'http://46.101.255.171:4003/api'],
-    'Bind dev': [47,     6, 'https://explorer.nos.dev',          '/address/',    'http://104.209.180.20:4003/api'],     # thamar's node - please use your own relay node
+    'Bind dev': [47,     6, 'https://explorer.nos.dev',          '/address/',    'http://104.209.180.20:7003/api'],     # thamar's node - please use your own relay node
     'Qredit': [51,       8, 'https://explorer.qredit.io/#',      '/address/',    'https://qredit.cloud/api'],
     'QreditV2': [51,     8, 'https://explorer.sh/#',             '/address/',    'http://52.191.185.7:5103/api'],
     'Blockpool': [201,  15, 'http://bplexp.blockpool.io',        '/address/',    'http://api.mainnet.blockpool.io:9031/api'],
