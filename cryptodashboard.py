@@ -490,16 +490,16 @@ def dashboard():
                 try:
                     coininfo_output['coins'].pop(id)
                 except:
-                    break
+                    continue
                 print("The node entry of -" + id + "- is deleted/removed from the output file (not from the config.json)")
-                break
+                continue
             elif action == "template":
                 # print("This entry is the template entry to show what needs to be filled in, do nothing, next!")
-                break
+                continue
             elif action == "skip":
                 print("The node entry of -" + id + "- is skipped!")
                 # todo - do we need to (re)set values to make this item on the outside visible that it is not activly sampled at all anymore, grey-out or so?
-                break
+                continue
 
             takesample = 0
             pub_address = coin_type_entry["pubaddress"]
@@ -535,7 +535,11 @@ def dashboard():
                             rank = coin_ark_delegateinfo["rank"]
                             producedblocks = coin_ark_delegateinfo["blocks"]["produced"]
                             votingweight = int(coin_ark_delegateinfo["votes"]) / 100000000
-                            lastforgedblock_timestamp = coin_ark_delegateinfo["blocks"]["last"]["timestamp"]["unix"]
+
+                            try:
+                                lastforgedblock_timestamp = coin_ark_delegateinfo["blocks"]["last"]["timestamp"]["unix"]
+                            except:
+                                lastforgedblock_timestamp = 0
 
                             # Extract delegate and coin info
                             totalbalance = int(float(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "balance"))) / 100000000
@@ -552,7 +556,7 @@ def dashboard():
                             network_explorerlink_with_address = network_explorerlink + networksettings[networkname][3] + pub_address
                         else:
                             if monitoring == "yes":
-                                thismonitoringmessage = network_nodeurl + " - incorrect"
+                                thismonitoringmessage = network_nodeurl + " - incorrect or maintenance?"
                                 monitoringresults.append({"coin": id, "message": thismonitoringmessage})
                             # skip all coins in for this node type - no use to check other and update with incorrect info
                             break
@@ -604,10 +608,6 @@ def dashboard():
                     # Enkel GNY
                     elif "GNY" in networkname:
 
-                        # Extract delegate and coin info
-                        totalbalance = int(float(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "balance"))) / 100000000
-
-
                         # get all the delegate info
                         coin_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "delegates")
                         if coin_delegateinfo != "":
@@ -623,26 +623,32 @@ def dashboard():
                             # lastforgedblock_timestamp = coin_delegateinfo["blocks"]["last"]["timestamp"]["unix"]
                             # lastforgedblock_timestamp = get_dpos_api_info_v2(networkname, network_nodeurl, coin_pubkey, "blocks")
 
+                            # Extract balance
+                            totalbalance = int(float(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "balance"))) / 100000000
 
 
-                        # get from a dpos address MaxNummerOfVotes you can cast and the names of the delegates who
-                        # are currently not in the forging state with their forging position!
-                        nrofvotescasted = 0
-                        notforgingdelegates = ""
-                        #  todo                nrofvotescasted, notforgingdelegates = get_dpos_private_vote_info_ark(network_nodeurl, pub_address)
+                            # get from a dpos address MaxNummerOfVotes you can cast and the names of the delegates who
+                            # are currently not in the forging state with their forging position!
+                            nrofvotescasted = 0
+                            notforgingdelegates = ""
+                            #  todo                nrofvotescasted, notforgingdelegates = get_dpos_private_vote_info_ark(network_nodeurl, pub_address)
 
 
-                        # # Yield: Productivity calculated over the last 100 rounds.
-                        # # Below, isn't working, API can't give last 100 blocks forged by this delegate! But Missedblocks is available
-                        # recent_blocks = get_dpos_api_info_v2(networkname, network_nodeurl, delegatename, "blocks2")
-                        # curr_status = get_dpos_api_info_v2(networkname, network_nodeurl, delegatename, "status")
-                        # if curr_status != "" and recent_blocks != "":
-                        #     productivity = int(productivity_check_gny(networkname, recent_blocks, int(curr_status["height"])))
-                        # else:
-                        #     productivity = 1
-
-
-                        network_explorerlink_with_address = network_explorerlink + networksettings[networkname][3] + pub_address
+                            # # Yield: Productivity calculated over the last 100 rounds.
+                            # # Below, isn't working, API can't give last 100 blocks forged by this delegate! But Missedblocks is available
+                            # recent_blocks = get_dpos_api_info_v2(networkname, network_nodeurl, delegatename, "blocks2")
+                            # curr_status = get_dpos_api_info_v2(networkname, network_nodeurl, delegatename, "status")
+                            # if curr_status != "" and recent_blocks != "":
+                            #     productivity = int(productivity_check_gny(networkname, recent_blocks, int(curr_status["height"])))
+                            # else:
+                            #     productivity = 1
+                            network_explorerlink_with_address = network_explorerlink + networksettings[networkname][3] + pub_address
+                        else:
+                            if monitoring == "yes":
+                                thismonitoringmessage = network_nodeurl + " - incorrect or maintenance?"
+                                monitoringresults.append({"coin": id, "message": thismonitoringmessage})
+                            # skip all coins in for this node type - no use to check other and update with incorrect info
+                            break
 
                     elif networkname in otherdpos_type_nodes:
                         # get the public key of this address
@@ -698,7 +704,7 @@ def dashboard():
                             network_explorerlink_with_address = network_explorerlink + networksettings[networkname][3] + pub_address
                         else:
                             if monitoring == "yes":
-                                thismonitoringmessage = network_nodeurl + " - incorrect"
+                                thismonitoringmessage = network_nodeurl + " - incorrect or maintenance?"
                                 monitoringresults.append({"coin": id, "message": thismonitoringmessage})
                             # skip all coins in for this node type - no use to check other and update with incorrect info
                             break
@@ -751,8 +757,6 @@ def dashboard():
                         "productivity": 0,
                         "lastforgedblock_timestamp": lastforgedblock_timestamp
                     }
-
-
 
                     # Specific delegate Dpos coin info
                     coininfo_tocheck["rank"] = rank
