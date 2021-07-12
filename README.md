@@ -154,6 +154,10 @@ At the moment CryptDashboard supports and is tested on the following chains / ex
 
 ## Changelog
 
+###### Release 0.981
+- removed shift; qreditv1; shift main; shift test
+- added lisk v3 (not final yet)
+
 ###### Release 0.98
 - Complete rework!
   - removed/disabled the views of DPoS wallets, BTC/Alt coin wallets; will be activated later on

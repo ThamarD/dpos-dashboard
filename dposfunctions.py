@@ -21,7 +21,9 @@ def get_dpos_api_info_v2(blockchain, node_url, address, api_info):
     if blockchain in ark_type_nodes:
         return get_dpos_api_info_ark(node_url, address, api_info)
     elif blockchain in lisk_type_nodes:
-        return get_dpos_api_info_liskv2(node_url, address, api_info)
+            return get_dpos_api_info_liskv2(node_url, address, api_info)
+    elif blockchain in liskv3_type_nodes:
+            return get_dpos_api_info_liskv3(node_url, address, api_info)
     elif "GNY" in blockchain:
         return get_dpos_api_info_gny(node_url, address, api_info)
     #todo  elif blockchain == "olddpos":
@@ -98,8 +100,9 @@ def get_dpos_api_info_ark(node_url, address, api_info):
                         return 0
                     return ""
             else:
-                print("Error (not 200): " + str(
-                    response.status_code) + ' URL: ' + request_url + ', response: ' + response.text)
+                shorttext = response.text[:25] + (response.text[25:] and '..')
+                print("Error (not 200): " + str(response.status_code) + ' URL: '
+                      + request_url + ', response: ' + shorttext)
                 if api_info == "balance" or api_info == "voters":
                     return 0
                 return ""
@@ -252,8 +255,78 @@ def get_dpos_api_info_liskv2(node_url, address, api_info):
                     return 0
                 return ""
         else:
+            shorttext = response.text[:25] + (response.text[25:] and '..')
             print("Error (not 200): " + str(response.status_code) + ' URL: '
-                  + request_url + ', response: ' + response.text)
+                  + request_url + ', response: ' + shorttext)
+            if api_info == "balance" or api_info == "voters":
+                return 0
+            return ""
+    except:
+        print("Error: url is probably not correct: " + request_url)
+        # known case: with parameter 'delegates' and if there are no votes returned from API, this exception occurs
+        if api_info == "balance" or api_info == "voters":
+            return 0
+        else:
+            return ""
+
+
+def get_dpos_api_info_liskv3(node_url, address, api_info):
+
+    if api_info == "balance" or api_info == "publicKey":
+        request_url = node_url + '/accounts?address=' + address
+    elif api_info == "account":
+        request_url = node_url + '/accounts?address=' + address + "&isDelegate=true&limit=10&offset=0"
+    elif api_info == "forgingdelegates":
+        request_url = node_url + '/delegates?offset=0&limit=101&sort=rank%3Aasc'
+    elif api_info == "transactions":
+        request_url = node_url + '/transactions?recipientId=' + address + '&limit=10&offset=0&sort=timestamp:desc'
+    elif api_info == "epoch":
+        request_url = node_url + '/getBlockStatus'
+    elif api_info == "blocks":
+        request_url = node_url + '/blocks?limit=10&offset=0&generatorPublicKey=' + address + '&sort=timestamp:desc'
+    elif api_info == "voters":
+        request_url = node_url + '/votes_received?address=' + address
+    elif api_info == "votes":
+        request_url = node_url + '/votes?address=' + address + '&offset=0&limit=101&sort=username%3Aasc'
+    else:
+        return ""
+
+    try:
+        response = requests.get(request_url, timeout=10)
+        if response.status_code == 200:
+            response_json = response.json()
+
+            if api_info == "epoch":
+                return response_json[api_info]
+            elif response_json["data"]:
+                if api_info == "publicKey":
+                    return response_json["data"][0]["publicKey"]
+                if api_info == "balance":
+                    return response_json["data"][0]["token"][api_info]
+                elif api_info == "voters":
+                    return int(response_json["data"]["account"]["votesReceived"])
+                elif api_info == "votes":
+                    return response_json["data"]["votes"]
+                elif api_info == "blocks":
+                    return response_json["data"][0]["timestamp"]
+                elif api_info == "forgingdelegates":
+                    return response_json["data"]
+                elif api_info == "transactions":
+                    return response_json["data"][0]
+                elif api_info == "account":
+                    return response_json["data"][0]["dpos"]["delegate"]
+                else:
+                    if api_info == "balance" or api_info == "voters":
+                        return 0
+                    return ""
+            else:
+                if api_info == "balance" or api_info == "voters":
+                    return 0
+                return ""
+        else:
+            shorttext = response.text[:25] + (response.text[25:] and '..')
+            print("Error (not 200): " + str(response.status_code) + ' URL: '
+                  + request_url + ', response: ' + shorttext)
             if api_info == "balance" or api_info == "voters":
                 return 0
             return ""
@@ -320,8 +393,9 @@ def get_dpos_api_info_gny(node_url, address, api_info):
                     return 0
                 return ""
         else:
+            shorttext = response.text[:25] + (response.text[25:] and '..')
             print("Error (not 200): " + str(response.status_code) + ' URL: '
-                  + request_url + ', response: ' + response.text)
+                  + request_url + ', response: ' + shorttext)
             if api_info == "balance" or api_info == "voters":
                 return 0
             return ""

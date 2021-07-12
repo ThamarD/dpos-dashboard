@@ -220,87 +220,6 @@ def dict_compare(d1, d2):
     return added, removed, modified, same
 
 
-##############################################################################
-# get_dpos_api_info
-# specific for Dpos nodes and their API
-# node_url: is the base of the API without the /, which is stripped earlier
-# address: can be several identifications: the public address; the publickey
-# api_info : indicates which part of the API we use (see the elif statement)
-#
-# a bit adhoc, but it should work https://node08.lisk.io/api/blocks
-
-# https://wallet.mylisk.com/api/transactions?recipientId=139289198949001083L&toTimestamp=1540633350&limit=10&offset=0&sort=amount%3Adesc
-# https://explorer.mylisk.com/api/getBlockStatus
-# https://node01.lisk.io/api/transactions?senderIdOrRecipientId=139289198949001083L&limit=10&offset=0&sort=timestamp:desc
-
-# /api/blocks?limit=10&offset=0&generatorPublicKey=ec111c8ad482445cfe83d811a7edd1f1d2765079c99d7d958cca1354740b7614&sort=timestamp%3Aasc
-
-def get_dpos_api_info_lisk(node_url, address, api_info):
-
-    if api_info == "balance" or api_info == "publicKey":
-        request_url = node_url + '/api/accounts?address=' + address
-    elif api_info == "delegates":
-        request_url = node_url + '/api/delegates?address=' + address
-    elif api_info == "forgingdelegates":
-        request_url = node_url + '/api/delegates?offset=0&limit=101&sort=rank%3Aasc'
-    elif api_info == "transactions":
-        request_url = node_url + '/api/transactions?recipientId=' + address + '&limit=10&offset=0&sort=timestamp:desc'
-    elif api_info == "epoch":
-        request_url = node_url + '/api/getBlockStatus'
-    elif api_info == "blocks":
-        request_url = node_url + '/api/blocks?limit=10&offset=0&generatorPublicKey=' + address + '&sort=timestamp:desc'
-    elif api_info == "voters":
-        request_url = node_url + '/api/voters?address=' + address
-    elif api_info == "votes":
-        request_url = node_url + '/api/votes?address=' + address + '&offset=0&limit=101&sort=username%3Aasc'
-    else:
-        return ""
-
-    try:
-        response = requests.get(request_url, timeout=10)
-        if response.status_code == 200:
-            response_json = response.json()
-
-            if api_info == "epoch":
-                return response_json[api_info]
-            elif response_json["data"]:
-                if api_info == "publicKey":
-                    return response_json["data"][0]["publicKey"]
-                if api_info == "balance":
-                    return response_json["data"][0][api_info]
-                elif api_info == "voters":
-                    return int(response_json["data"]["votes"])
-                elif api_info == "votes":
-                    return response_json["data"]["votes"]
-                elif api_info == "blocks":
-                    return response_json["data"][0]["timestamp"]
-                elif api_info == "forgingdelegates":
-                    return response_json["data"]
-                elif api_info == "delegates" or api_info == "transactions":
-                    return response_json["data"][0]
-                else:
-                    if api_info == "balance" or api_info == "voters":
-                        return 0
-                    return ""
-            else:
-                if api_info == "balance" or api_info == "voters":
-                    return 0
-                return ""
-        else:
-            print("Error (not 200): " + str(response.status_code) + ' URL: '
-                  + request_url + ', response: ' + response.text)
-            if api_info == "balance" or api_info == "voters":
-                return 0
-            return ""
-    except:
-        print("Error: url is probably not correct: " + request_url)
-        # known case: with parameter 'delegates' and if there are no votes returned from API, this exception occurs
-        if api_info == "balance" or api_info == "voters":
-            return 0
-        else:
-            return ""
-
-
 ##############################################################################3
 # get_dpos_api_info
 # specific for Dpos nodes and their API
@@ -388,27 +307,6 @@ def get_dpos_private_vote_info(coin_nodeurl, address):
     return len(private_delegate_vote_info), notforgingdelegates
 
 
-def get_dpos_private_vote_info_lisk(coin_nodeurl, address):
-    private_delegate_vote_info = get_dpos_api_info_lisk(coin_nodeurl, address, "votes")
-    forging_delegates_info = get_dpos_api_info_lisk(coin_nodeurl, "", "forgingdelegates")
-
-    # create a dict for the not forging names
-    notforgingdelegates = {}
-    forgingdelegatesnames = {}
-    voteddelegates = {}
-
-    for networkname in forging_delegates_info:
-        forgingdelegatesnames.update({networkname["username"]: networkname["rank"]})
-
-    for networkname in private_delegate_vote_info:
-        if networkname["username"] not in forgingdelegatesnames:
-            # get the rank of the not forgingdelegate
-            delegate_info = get_dpos_api_info_lisk(coin_nodeurl, networkname["address"], "delegates")
-            notforgingdelegates[networkname["username"]] = delegate_info["rank"]
-
-    return len(private_delegate_vote_info), notforgingdelegates
-
-
 def human_format(num, round_to=2):
     magnitude = 0
     if abs(num) < 1000:
@@ -446,7 +344,7 @@ def dashboard():
         keep4history = 1
 
     secondspastsincelastsample = int(time.time()) - coininfo_output['hourlysampletime']
-    if secondspastsincelastsample > (60*60):
+    if secondspastsincelastsample >= (60*60):
         hourlysample = 1
         coininfo_output['hourlysampletime'] = int(time.time())
 
@@ -564,40 +462,83 @@ def dashboard():
                     # Lisk 2.0 based nodes/chains
                     elif networkname in lisk_type_nodes:
 
-                        totalbalance = int(float(get_dpos_api_info_lisk(network_nodeurl, pub_address, "balance"))) / 100000000
-                        nrofvoters = int(get_dpos_api_info_lisk(network_nodeurl, pub_address, "voters"))
+                        totalbalance = int(float(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "balance"))) / 100000000
+                        nrofvoters = int(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "voters"))
 
                         # get all the delegate info
-                        coin_lisk_delegateinfo = get_dpos_api_info_lisk(network_nodeurl, pub_address, "delegates")
+                        coin_lisk_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "delegates")
                         if coin_lisk_delegateinfo != "":
                             delegatename = coin_lisk_delegateinfo["username"]
                             coin_pubkey = coin_lisk_delegateinfo["account"]["publicKey"]
                             rank = coin_lisk_delegateinfo["rank"]
+                            approval = coin_lisk_delegateinfo["approval"]
                             producedblocks = coin_lisk_delegateinfo["producedBlocks"]
                             votingweight = int(coin_lisk_delegateinfo["vote"]) / 100000000
                             missedblocks = coin_lisk_delegateinfo["missedBlocks"]
                         else:
                             coin_pubkey = ""
 
+                        # get from a dpos address MaxNummerOfVotes you can cast and the names of the delegates who are currently not in the forging state with their forging position!
+# not in v3?                                               nrofvotescasted, notforgingdelegates = get_dpos_private_vote_info_lisk(network_nodeurl, pub_address)
+
+                        # get last transaction
+                        transactions = get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "transactions")
+                        if len(transactions) > 0:
+                            amountreceived = int(transactions["amount"]) / 100000000
+
+                            coin_epoch = get_dpos_api_info_v2(networkname, network_explorerlink, pub_address, "epoch")
+                            # epoch "2016-05-24T17:00:00.000Z"
+                            # convert the epoch time to a normal Unix time in sec datetime.strptime('1984-06-02T19:05:00.000Z', '%Y-%m-%dT%H:%M:%S.%fZ')
+                            if len(coin_epoch) > 0:
+                                utc_dt = datetime.strptime(coin_epoch, '%Y-%m-%dT%H:%M:%S.%fZ')
+                                # Convert UTC datetime to seconds since the Epoch and add the found transaction timestamp to get the correct Unix date/time in sec.
+                                timereceived = (utc_dt - datetime(1970, 1, 1)).total_seconds() + transactions["timestamp"]
+
+                        # get the Date and Time of the last forged block of this delegate
+                        blocks_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, coin_pubkey, "blocks")
+                        if blocks_delegateinfo:
+                            lastforgedblock_timestamp = (utc_dt - datetime(1970, 1, 1)).total_seconds() + blocks_delegateinfo
+
+                        network_explorerlink_with_address = network_explorerlink + "/address/" + pub_address
+
+
+                    # Lisk 3.0 based nodes/chains
+                    elif networkname in liskv3_type_nodes:
+
+                        totalbalance = int(float(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "balance"))) / 100000000
+                        nrofvoters = int(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "voters"))
+
+                        # get all the delegate info
+                        coin_lisk_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "account")
+                        if coin_lisk_delegateinfo != "":
+                            delegatename = coin_lisk_delegateinfo["username"]
+                            coin_pubkey = "" # todo coin_lisk_delegateinfo["account"]["publicKey"]
+                            rank = coin_lisk_delegateinfo["rank"]
+                            producedblocks = 0 # todo coin_lisk_delegateinfo["producedBlocks"]
+                            votingweight = int(coin_lisk_delegateinfo["totalVotesReceived"]) / 100000000
+                            missedblocks = coin_lisk_delegateinfo["consecutiveMissedBlocks"]
+                        else:
+                            coin_pubkey = ""
+
                         # get from a dpos address MaxNummerOfVotes you can cast and the names of the delegates
                         # who are currently not in the forging state with their forging position!
-                        nrofvotescasted, notforgingdelegates = get_dpos_private_vote_info_lisk(network_nodeurl, pub_address)
+# not in v3?                        nrofvotescasted, notforgingdelegates = get_dpos_private_vote_info_lisk(network_nodeurl, pub_address)
 
                         # get epoch of chain via explorer API |e.g. epoch "2016-05-24T17:00:00.000Z"
                         # convert epoch time to a normal Unix time in sec
-                        coin_epoch = get_dpos_api_info_lisk(network_explorerlink, 0, "epoch")
+                        coin_epoch = get_dpos_api_info_v2(networkname, network_explorerlink, pub_address, "epoch")
                         utc_dt = 0
                         if len(coin_epoch) > 0:
                             utc_dt = datetime.strptime(coin_epoch, '%Y-%m-%dT%H:%M:%S.%fZ')
 
                         # get last transaction / and determine the received ammount and time (Convert UTC datetime to seconds)
-                        transactions = get_dpos_api_info_lisk(network_nodeurl, pub_address, "transactions")
+                        transactions = get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "transactions")
                         if len(transactions) > 0:
                             amountreceived = int(transactions["amount"]) / 100000000
                             timereceived = (utc_dt - datetime(1970, 1, 1)).total_seconds() + float(transactions["timestamp"])
 
                         # get the Date and Time of the last forged block of this delegate
-                        blocks_delegateinfo = get_dpos_api_info_lisk(network_nodeurl, coin_pubkey, "blocks")
+                        blocks_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, coin_pubkey, "blocks")
                         if blocks_delegateinfo and len(coin_epoch) > 0:
                             lastforgedblock_timestamp = (utc_dt - datetime(1970, 1, 1)).total_seconds() + blocks_delegateinfo
                         else:

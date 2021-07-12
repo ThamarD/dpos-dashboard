@@ -1,0 +1,183 @@
+{
+  "logfile": "cdashboard.json",
+  "cryptodashboard_file_version": 0.98,
+  "crunch_history": true,
+  "telegram_settings": {
+    "use_telegram": true,
+    "bot_key": "460106133:AAGYASgrYG0d8ONIC8yX4yiC0fM6TgP3sVE",
+    "chat_id": "277426191"
+  },
+
+  "coins": {
+    "Lisk test": [
+        {
+          "id": "LSK thamar t",
+          "pubaddress": "lskw25frxxducnq5r8yyy49jhk2wfsruvo6fn4j22",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "Lisk main": [
+        {
+          "id": "LSK thamar m",
+          "pubaddress": "6858349578024131108L",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "Adamant": [
+      {
+          "id": "ADM fnoufnou m",
+          "pubaddress": "U16689000053483831304",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": ""
+      },
+      {
+          "id": "ADM dutch_pool m",
+          "pubaddress": "U6668357847233195296",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": ""
+      },
+      {
+          "id": "ADM tartarus m",
+          "pubaddress": "U9726541097867295022",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+      },
+      {
+          "id": "ADM thamar m",
+          "pubaddress": "U7932238642521827994",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+      }
+    ],
+    "Bind dev": [
+        {
+          "id": "BND wolf t",
+          "pubaddress": "dEGnMDZhSoQ6wGoK1m3oXg7WmgGQQ4T3qA",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        },
+        {
+          "id": "BND thamar t",
+          "pubaddress": "dDixkNdihE7ZjoquwR7iPfKFqZH7B6MRfA",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "Rise": [
+        {
+          "id": "RISE thamar m",
+          "pubaddress": "14618965301536376191R",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "Blockpool": [
+        {
+          "id": "BPL teutonic m",
+          "pubaddress": "BLiuQpxQBCCEGSKeHh8hto7aNYTGjRAep5",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "GNY test": [
+        {
+          "id": "GNY thamar t",
+          "pubaddress": "G5hNSdUk11ojKYXerYsNd3TqvMmv",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "GNY main": [
+        {
+          "id": "GNY bcboilerm m",
+          "pubaddress": "G2Fr6uTagMS6Rg4EVP1tJP4mR2o3M",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "Hydra": [
+        {
+          "id": "HDR thamar m",
+          "pubaddress": "hRneKjj9dQq2thdfRXEsXdW3XStUEz1SSg",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "LeaseHold": [
+        {
+          "id": "LSH thamar m",
+          "pubaddress": "493166112005779060L",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        },
+        {
+          "id": "LSH rush m",
+          "pubaddress": "15330756271841838314L",
+          "viewtype": "dpos_delegate",
+          "monitoring": "no",
+          "action": ""
+        }
+    ],
+    "Ark": [
+        {
+          "id": "ARK dutch_pool m",
+          "pubaddress": "AbxUBkEmEGb3kahQUKJ6LfqsKWGcy3nTij",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "DArk": [
+        {
+          "id": "DARK thamar test",
+          "pubaddress": "DAGSCPYZKPMV8V5eRjZW8KfCyRqgmw74FJ",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "Bind main": [
+        {
+          "id": "BND thamar m",
+          "pubaddress": "cXrAgLLJ2VTEu2hYHVSm4Jc5xhofmgYd4c",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        },
+        {
+          "id": "BND wolf m",
+          "pubaddress": "cmNanqKRzE1NAPccqnZXwh1YMQf8qNdbYP",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],
+    "QreditV2": [
+        {
+          "id": "XQRv2 thamar m",
+          "pubaddress": "XXwMmPacHUg7bPDpedRMYwq2Ma1ksWsLVv",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ]
+  }
+}
+
+
