@@ -459,7 +459,7 @@ def dashboard():
                             # skip all coins in for this node type - no use to check other and update with incorrect info
                             break
 
-                    # Lisk 2.0 based nodes/chains
+                    # Lisk based v2.0 =  LeaseHold!
                     elif networkname in lisk_type_nodes:
 
                         totalbalance = int(float(get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "balance"))) / 100000000
@@ -524,25 +524,18 @@ def dashboard():
                         # who are currently not in the forging state with their forging position!
 # not in v3?                        nrofvotescasted, notforgingdelegates = get_dpos_private_vote_info_lisk(network_nodeurl, pub_address)
 
-                        # get epoch of chain via explorer API |e.g. epoch "2016-05-24T17:00:00.000Z"
-                        # convert epoch time to a normal Unix time in sec
-                        coin_epoch = get_dpos_api_info_v2(networkname, network_explorerlink, pub_address, "epoch")
-                        utc_dt = 0
-                        if len(coin_epoch) > 0:
-                            utc_dt = datetime.strptime(coin_epoch, '%Y-%m-%dT%H:%M:%S.%fZ')
-
                         # get last transaction / and determine the received ammount and time (Convert UTC datetime to seconds)
-                        transactions = get_dpos_api_info_v2(networkname, network_nodeurl, pub_address, "transactions")
-                        if len(transactions) > 0:
-                            amountreceived = int(transactions["amount"]) / 100000000
-                            timereceived = (utc_dt - datetime(1970, 1, 1)).total_seconds() + float(transactions["timestamp"])
+                        # transactions = get_dpos_api_info_v2(networkname, network_nodeurl, delegatename, "transactions")
+                        # if len(transactions) > 0:
+                        #     amountreceived = int(transactions["amount"]) / 100000000
+                        #     timereceived = (datetime(1970, 1, 1)).total_seconds() + float(transactions["timestamp"])
 
-                        # get the Date and Time of the last forged block of this delegate
-                        blocks_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, coin_pubkey, "blocks")
-                        if blocks_delegateinfo and len(coin_epoch) > 0:
-                            lastforgedblock_timestamp = (utc_dt - datetime(1970, 1, 1)).total_seconds() + blocks_delegateinfo
-                        else:
-                            lastforgedblock_timestamp = 0
+                        # # get the Date and Time of the last forged block of this delegate
+                        # blocks_delegateinfo = get_dpos_api_info_v2(networkname, network_nodeurl, coin_pubkey, "blocks")
+                        # if blocks_delegateinfo and len(coin_epoch) > 0:
+                        #     lastforgedblock_timestamp = (datetime(1970, 1, 1)).total_seconds() + blocks_delegateinfo
+                        # else:
+                        #       lastforgedblock_timestamp = 0
 
                         network_explorerlink_with_address = network_explorerlink + networksettings[networkname][3] + pub_address
 

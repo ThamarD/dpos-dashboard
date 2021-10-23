@@ -279,7 +279,7 @@ def get_dpos_api_info_liskv3(node_url, address, api_info):
     elif api_info == "forgingdelegates":
         request_url = node_url + '/delegates?offset=0&limit=101&sort=rank%3Aasc'
     elif api_info == "transactions":
-        request_url = node_url + '/transactions?recipientId=' + address + '&limit=10&offset=0&sort=timestamp:desc'
+        request_url = node_url + '/transactions?search=' + address + '&limit=10&offset=0&sort=timestamp:desc'
     elif api_info == "epoch":
         request_url = node_url + '/getBlockStatus'
     elif api_info == "blocks":

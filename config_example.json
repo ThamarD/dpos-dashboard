@@ -25,29 +25,6 @@
           "action": ""
         }
     ],
-    "Shift main": [
-        {
-          "id": "Shift shift2btc m",
-          "pubaddress": "14980866989388096412S",
-          "viewtype": "dpos_delegate",
-          "monitoring": "no",
-          "action": ""
-        },
-        {
-          "id": "Shift dwildcash m",
-          "pubaddress": "5263887536226471487S",
-          "viewtype": "dpos_delegate",
-          "monitoring": "no",
-          "action": ""
-        },
-        {
-          "id": "Shift  bioly m",
-          "pubaddress": "16885143243405910776S",
-          "viewtype": "dpos_delegate",
-          "monitoring": "no",
-          "action": ""
-        }
-    ],
     "Bind dev": [
         {
           "id": "BND thamar t",
@@ -75,8 +52,8 @@
     ],
     "GNY main": [
         {
-          "id": "GNY gny_d64 m",
-          "pubaddress": "G3gBQq3Ha3vo6JZRvCCfSLdpcRvh",
+          "id": "GNY tonyt_gny m",
+          "pubaddress": "GNm3pzbbxL5sLL4KC5eNRFv8PF1Y",
           "viewtype": "dpos_delegate",
           "monitoring": "yes",
           "action": ""
@@ -136,15 +113,6 @@
           "action": ""
         }
     ],
-    "Qredit": [
-        {
-          "id": "XQR xxxx m",
-          "pubaddress": "",
-          "viewtype": "dpos_delegate",
-          "monitoring": "no",
-          "action": "template"
-        }
-    ],
     "QreditV2": [
         {
           "id": "XQRv2 thamar m",
@@ -157,7 +125,7 @@
     "Lisk main": [
         {
           "id": "LSK vex m",
-          "pubaddress": "9102643396261850794L",
+          "pubaddress": "lskq3wchaguvq4whrsyjaegc7a7heh96nesfszcpd",
           "viewtype": "dpos_delegate",
           "monitoring": "yes",
           "action": ""
@@ -166,7 +134,7 @@
     "Lisk test": [
         {
           "id": "LSK cc001 t",
-          "pubaddress": "5201600508578320196L",
+          "pubaddress": "lsk3ynkdj3dauwkydhc9qsvybathsv2wwvmnoxcw7",
           "viewtype": "dpos_delegate",
           "monitoring": "no",
           "action": ""
