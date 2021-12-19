@@ -8,6 +8,7 @@ ark_type_nodes = {
     'Blockpool',
     'Hydra',
     'DSwap',
+    'ADC',
 }
 
 lisk_type_nodes = {
@@ -35,7 +36,8 @@ networksettings = {
     'QreditV2': [51,    8, 'https://explorer.sh',               '/qredit/wallet/',    'http://52.191.185.7:5103/api'],
     'Blockpool': [201, 15, 'http://bplexp.blockpool.io',        '/address/',    'http://api.mainnet.blockpool.io:9031/api'],
     'Hydra': [53,       8, 'http://hydra.iop.global/#',         '/address/',    'http://35.195.150.223:4703/api/v2'],
-    'DSwap': [51,       8, 'http://explorer.swipechain.org',   '/#/wallets/',    'http://13.92.194.196:4003/api'],     # thamar's node - please use your own relay node
+    'DSwap': [51,       8, 'http://explorer.swipechain.org',    '/#/wallets/',  'http://18.132.64.134:4003/api'],     # is a private node - please use your own relay node
+    'ADC': [53,         8, 'https://explorer.adc.blockpool.io', '/#/address/',  'https://api.adc.blockpool.io/api'],
 
     # Lisk based blockchains
     'LeaseHold': [39,   10, 'https://explorer.leasehold.io',    '/address/',    'http://52.252.112.187:8010'],      # thamar's node - please use your own relay node
