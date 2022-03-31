@@ -53,8 +53,8 @@ _Note: Never fill in your private keys, this software doesn't need those, we onl
 The parameters in the config.json:
 - logfile: the file where all gathered node info is stored; default "cdashboard.json"; you can change the logfile name the way you like (handy for setting up multiple config files with multiple log files, using one python script)
 - cryptodashboard_file_version: internal check if version is correct for updates
-- crunch_history: true or false; this will crunch the log file after 48 hours to only one sample a day; if false, you keep every sample, which is not advisable (and not tested).
--  telegram_settings:
+- crunch history: true or false; this will crunch the log file after 48 hours to only one sample a day; if false, you keep every sample, which is not advisable (and not tested).
+- telegram settings:
   - use_telegram: true or false
   - bot_key: "your-bot_key" (looks like: 340346133:AAGADFd4334YASONIC8yX4yiC0fM345kkrjweVE)
   - chat_id: "12345678"  
@@ -63,13 +63,14 @@ The parameters in the config.json:
   - pubaddress: the public address of the delegate wallet (no need / never add your private address/seeds!!!)
   - viewtype: option is: dpos_delegate; other options are not yet implemented
   - monitoring: options are: 
-    - yes: every 10 minutes this entry will be sampled and if something is wrong, and telegram is configured, you will be infomred
-    - no: every 60 minutes this enty is monitored and if something is wrong, you won't be informed via telegram
+    - yes: every 10 minutes this entry will be sampled and if something is wrong, and telegram is configured, you will be informed
+    - no: every 60 minutes this entry is monitored and if something is wrong, you won't be informed via telegram
   - action: options are
-    - "": this entry will be handeld normaly
-    - template: this entry will be ignord, no output entry will be made in the dashboard 
+    - "": this entry will be handled normally
+    - template: this entry will be ignored, no output entry will be made in the dashboard 
     - remove: remove this entry from the dashboard (cdashboard.json file); not from the config.json file
-    - skip: this entry will be skipped; used when you want to pauze the active monitoring
+    - skip: this entry will be skipped; used when you want to pause the active monitoring
+
 
 Example config.json:
 ```
@@ -147,12 +148,15 @@ optional arguments:
 
 At the moment CryptDashboard supports and is tested on the following chains / explorers:
 - DPoS (mainnet and testnet):  
-  - ARK based chains: ARKv2.x en v3, Compendia/Bind,  Qredit v1 en v2, Blockpool, Hydra
-  - Lisk based chains: Lisk, LeaseHold
-  - Other based chains: Shift, Rise, Adamant
+  - ARK based chains: Solar, Compendia/Bind, Blockpool, Hydra, ADC, ARKv2.x en v3, 
+  - Lisk based chains v2: LeaseHold
+  - Other based chains: Rise, Adamant, GNY
 
 
 ## Changelog
+
+###### Release 0.982
+- added solar test and mainnet (in test phase)
 
 ###### Release 0.981
 - removed shift; qreditv1; shift main; shift test
@@ -182,8 +186,6 @@ to get organized, we would greatly appreciate if you would consider to show some
 of the below mentioned addresses.
 
 - ETH    0x7E1B5CAf074e0AB5B8aA8d7373e2756Ca105e707
-- Shift: 18040765904662116201S
-- Lisk:  8890122000260193860L
 - BTC: 	 1NrA8k8wNRwEZj2ooKQEf2fFnF6KqTE32T
 
 
@@ -197,7 +199,7 @@ Thanks @st3v3n, @kippers, @fnoufnou for your help creating and testing this proj
 ## License
 
 ```
-Copyright (c) 2021 Thamar proud member of Dutch Pool
+Copyright (c) 2022 Thamar proud member of Dutch Pool
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

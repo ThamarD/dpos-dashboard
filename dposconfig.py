@@ -7,7 +7,8 @@ ark_type_nodes = {
     'QreditV2',
     'Blockpool',
     'Hydra',
-    'DSwap',
+    'Solar main',
+    'Solar test',
     'ADC',
 }
 
@@ -33,10 +34,11 @@ networksettings = {
     'DArk': [51,        8, 'https://dexplorer.ark.io',          '/wallets/',    'http://52.191.185.7:4003/api'],       # thamar's node - please use your own relay node
     'Bind main': [47,   6, 'https://bindscan.io',               '/address/',    'http://46.101.255.171:4003/api'],
     'Bind dev': [47,    6, 'https://testnet.bindscan.io',       '/address/',    'http://104.209.180.20:7003/api'],     # thamar's node - please use your own relay node
-    'QreditV2': [51,    8, 'https://explorer.sh',               '/qredit/wallet/',    'http://52.191.185.7:5103/api'],
+    'QreditV2': [51,    8, 'https://explorer.sh',               '/xqr/wallet/', 'http://52.191.185.7:5103/api'],
     'Blockpool': [201, 15, 'http://bplexp.blockpool.io',        '/address/',    'http://api.mainnet.blockpool.io:9031/api'],
     'Hydra': [53,       8, 'http://hydra.iop.global/#',         '/address/',    'http://35.195.150.223:4703/api/v2'],
-    'DSwap': [51,       8, 'http://explorer.swipechain.org',    '/#/wallets/',  'http://18.132.64.134:4003/api'],     # is a private node - please use your own relay node
+    'Solar main': [53,  8, 'https://explorer.solar.org',        '/wallets/',  'https://sxp.mainnet.sh/api'],
+    'Solar test': [53,  8, 'https://texplorer.solar.org',       '/wallets/',  'https://sxp.testnet.sh/api'],
     'ADC': [53,         8, 'https://explorer.adc.blockpool.io', '/#/address/',  'https://api.adc.blockpool.io/api'],
 
     # Lisk based blockchains
@@ -61,4 +63,4 @@ networksettings = {
 #   'Bind dev': [47,     6, 'https://explorer.nos.dev',         '/address/',    'https://api.nos.dev/api'],
 #   'Shift main': [101, 27, 'https://explorer.shiftnrg.io', '/address/', 'https://wallet.shiftnrg.org/api'],  # Network will be shutdown soon!
 #   'Shift test': [101, 27, 'https://testnet.explorer.shiftnrg.io', '/address/', 'https://wallet.testnet.shiftnrg.org/api'],  # Network will be shutdown soon!
-#   'Qredit': [51, 8, 'https://explorer.qredit.io/#', '/address/', 'https://qredit.cloud/api'],
+#   'Qredit': [51, 8, 'https://explorer.qredit.io/#', '/address/', 'https://qredit.cloud/api'], #Qredit V1
