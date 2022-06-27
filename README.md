@@ -84,6 +84,15 @@ Example config.json:
     "chat_id": "12345678"
   },
   "coins": {
+      "Solar main": [
+        {
+          "id": "SXP thamar m",
+          "pubaddress": "SdjpYKrZqzBwe3We4TxUNGYD48q34yTD9c",
+          "viewtype": "dpos_delegate",
+          "monitoring": "yes",
+          "action": ""
+        }
+    ],    
     "Bind main": [
         {
           "id": "BND bindfarm m",
@@ -156,7 +165,7 @@ At the moment CryptDashboard supports and is tested on the following chains / ex
 ## Changelog
 
 ###### Release 0.982
-- added solar test and mainnet (in test phase)
+- added solar test and mainnet
 
 ###### Release 0.981
 - removed shift; qreditv1; shift main; shift test
