@@ -433,7 +433,10 @@ def dashboard():
                             pub_address = coin_ark_delegateinfo["address"]          # you can put delegate name in config (ADC) instead of public address; then we need to put it here
                             rank = coin_ark_delegateinfo["rank"]
                             producedblocks = coin_ark_delegateinfo["blocks"]["produced"]
-                            votingweight = int(coin_ark_delegateinfo["votes"]) / 100000000
+                            if networkname == "Solar test":
+                                votingweight = int(coin_ark_delegateinfo["votesReceived"]["votes"]) / 100000000
+                            else:
+                                votingweight = int(coin_ark_delegateinfo["votes"]) / 100000000
 
                             try:
                                 lastforgedblock_timestamp = coin_ark_delegateinfo["blocks"]["last"]["timestamp"]["unix"]
