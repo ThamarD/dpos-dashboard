@@ -433,7 +433,7 @@ def dashboard():
                             pub_address = coin_ark_delegateinfo["address"]          # you can put delegate name in config (ADC) instead of public address; then we need to put it here
                             rank = coin_ark_delegateinfo["rank"]
                             producedblocks = coin_ark_delegateinfo["blocks"]["produced"]
-                            if networkname == "Solar test":
+                            if networkname == "Solar test" or networkname == "Solar main":
                                 votingweight = int(coin_ark_delegateinfo["votesReceived"]["votes"]) / 100000000
                             else:
                                 votingweight = int(coin_ark_delegateinfo["votes"]) / 100000000
